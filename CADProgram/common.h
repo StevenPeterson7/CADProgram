@@ -1,3 +1,0 @@
-#pragma once
-
-// common libraries
