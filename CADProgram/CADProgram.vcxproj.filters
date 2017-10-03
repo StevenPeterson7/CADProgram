@@ -15,13 +15,16 @@
     <Filter Include="addons">
       <UniqueIdentifier>{c5a56a2c-2f91-407f-8c45-73b9f94978ee}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\ofApp.h">
-      <Filter>src</Filter>
-    </ClInclude>
+    <Filter Include="headers">
+      <UniqueIdentifier>{5ddfd916-3c2d-4e20-9e2f-6167f0daa97d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
