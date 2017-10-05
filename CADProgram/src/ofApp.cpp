@@ -1,7 +1,8 @@
 #include "ofApp.h"
-
+vector<int> points;
 //--------------------------------------------------------------
 void ofApp::setup(){
+	
 
 }
 
@@ -12,6 +13,12 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	for (int i = 0; i < points.size(); i += 2) {
+		ofSetColor(rand() % 255);
+			ofDrawCircle(points[i], points[i + 1], 100, 100);
+		
+	}
+
 
 }
 
@@ -37,6 +44,9 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+	points.push_back(x);
+	points.push_back(y);
+	cout << x << "," << y << endl;
 
 }
 
