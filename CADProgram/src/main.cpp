@@ -1,6 +1,7 @@
 #include "ofMain.h"
 #include "ofApp.h"
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 
