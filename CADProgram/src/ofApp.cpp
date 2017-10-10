@@ -5,7 +5,7 @@
 
 vector<int> points;
 bool sizingCircle = false;
-maze newMaze(10, 10);
+maze newMaze(150, 150);
 
 //--------------------------------------------------------------
 void ofApp::setup(){

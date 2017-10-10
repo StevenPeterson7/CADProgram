@@ -14,7 +14,7 @@ class maze
 {
 public:
 	maze(int w, int h);
-	cell cells[10][10];
+	cell cells[150][150];
 	void generateMaze();
 	void drawMaze();
 	

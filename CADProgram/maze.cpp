@@ -19,22 +19,23 @@ void cell::test() {
 }
 
 void cell::drawCell(int xPos, int mazeWidth, int yPos, int mazeHeight) {
+	int wallWidth = 1;
 	double cellWidth = 1024 / mazeWidth;
 	double cellHeight = 768 / mazeHeight;
 	ofSetColor(255);
 	ofDrawRectangle(cellWidth*xPos, cellHeight*yPos, cellWidth, cellHeight);
 	ofSetColor(0);
 	if (!passages[0]) {
-		ofDrawRectangle(cellWidth*xPos, cellHeight*yPos, cellWidth, 5);
+		ofDrawRectangle(cellWidth*xPos, cellHeight*yPos, cellWidth, wallWidth);
 		}
 	if (!passages[1]) {
-		ofDrawRectangle(cellWidth*xPos, cellHeight*yPos, 5, cellHeight);
+		ofDrawRectangle(cellWidth*xPos, cellHeight*yPos, wallWidth, cellHeight);
 	}
 	if (!passages[2]) {
-		ofDrawRectangle(cellWidth*xPos, cellHeight*(yPos + 1) - 5, cellWidth, 5);
+		ofDrawRectangle(cellWidth*xPos, cellHeight*(yPos + 1) - wallWidth, cellWidth, wallWidth);
 	}
 	if (!passages[3]) {
-		ofDrawRectangle(cellWidth*(xPos+1)-5, cellHeight*yPos, 5, cellHeight);
+		ofDrawRectangle(cellWidth*(xPos+1)-wallWidth, cellHeight*yPos, wallWidth, cellHeight);
 	}
 	
 };
@@ -49,37 +50,35 @@ maze::maze(int w, int h)
 
 void maze::generateMaze()
 {
+	int max = maze::x - 1;
+	int min = 0;
 	int xloc = 0, yloc = 0;
-	while (xloc < 10 && yloc < 10) {
+	while (xloc < maze::x && yloc < maze::y) {
 		cout << endl << xloc << ", " << yloc;
-		if (xloc < 9 && yloc % 2 == 0) {
+		if (xloc !=max && xloc!=0 ) {
 			cells[xloc][yloc].passages[1] = true;
 			cells[xloc][yloc].passages[3] = true;
-			xloc++;
-		}else if (xloc > 0 && yloc % 2 == 1) {
+			if (yloc % 2 == 0) {
+				xloc++;
+			}else if ( yloc % 2 == 1) {
+				xloc--;
+			}
+		}else if (xloc == max && yloc %2==0) {
+			cells[xloc][yloc].passages[2] = true;
 			cells[xloc][yloc].passages[1] = true;
-			cells[xloc][yloc].passages[3] = true;
-			xloc--;
-		}
-		else if (xloc == 9 && yloc %2==0) {
+			yloc++;
+		}else if (xloc == 0 && yloc%2==1) {
 			cells[xloc][yloc].passages[2] = true;
 			cells[xloc][yloc].passages[3] = true;
 			yloc++;
-		}
-		else if (xloc == 0 && yloc%2==1) {
+		}else if (xloc == 0 && yloc % 2 == 0) {
 			cells[xloc][yloc].passages[0] = true;
 			cells[xloc][yloc].passages[3] = true;
-			yloc++;
-		}
-		else if (xloc == 0 && yloc % 2 == 0) {
-			cells[xloc][yloc].passages[0] = true;
+			xloc++;
+		}else if (xloc == max && yloc % 2 == 1) {
 			cells[xloc][yloc].passages[1] = true;
-			yloc++;
-		}
-		else if (xloc == 9 && yloc % 2 == 1) {
-			cells[xloc][yloc].passages[3] = true;
 			cells[xloc][yloc].passages[0] = true;
-			yloc++;
+			xloc--;
 		}
 	}
 }
