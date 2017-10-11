@@ -1,12 +1,12 @@
 #include "ofApp.h"
 #include <math.h>
 #include "maze.h"
-
+#include "player.h"
 
 vector<int> points;
 bool sizingCircle = false;
-maze newMaze(150, 150);
-
+maze newMaze(30, 25);
+player player1(5, 5);
 //--------------------------------------------------------------
 void ofApp::setup(){
 	newMaze.generateMaze();
@@ -35,12 +35,26 @@ void ofApp::draw(){
 	}*/
 	
 	newMaze.drawMaze();
-
+	player1.drawPlayer2d();
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+	if (key == 'w') {
+		player1.moveForward();
+	}
+	if (key == 'a') {
+		player1.moveLeft();
+	}
+	if (key == 's') {
+		player1.moveBackward();
+	}
+	if (key == 'd') {
+		player1.moveRight();
+	}
+
+
 
 }
 

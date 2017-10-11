@@ -10,6 +10,12 @@
     <ClCompile Include="maze.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="cell.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -30,6 +36,12 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="maze.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cell.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>
