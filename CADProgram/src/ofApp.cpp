@@ -5,7 +5,7 @@
 
 vector<int> points;
 bool sizingCircle = false;
-maze newMaze(30, 25);
+maze newMaze(50, 50);
 player player1(5, 5);
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -13,8 +13,9 @@ void ofApp::setup(){
 
 }
 
-//--------------------------------------------------------------
+//------------------------------------------------------3--------
 void ofApp::update(){
+	player1.changeRadius();
 
 }
 

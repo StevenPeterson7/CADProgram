@@ -1,3 +1,4 @@
+#include <vector>
 #include "player.h"
 #include "ofMain.h"
 #include <math.h>
@@ -8,6 +9,16 @@ player::player(int x, int y)
 	player::y = y;
 
 	player::centerAngle = 0;
+	player::radius = 100;
+	player::arc.arc(player::x, player::y, player::radius, player::radius, player::centerAngle-(player::viewAngle/2), player::centerAngle + (player::viewAngle / 2));
+
+}
+
+void player::changeRadius()
+{
+	player::radius++;
+	player::arc.arc(player::x, player::y, player::radius, player::radius, player::centerAngle - (player::viewAngle / 2), player::centerAngle + (player::viewAngle / 2));
+
 }
 
 void player::moveForward()
@@ -46,9 +57,14 @@ void player::changeView()
 {
 }
 
+void player::castDemRays() {
+}
+
 void player::drawPlayer2d()
 {
-	ofDrawCircle(player::x, player::y, 5);
+	
+	ofDrawCircle(player::x, player::y, 2);
+	player::arc.draw();
 }
 
 void player::drawPlayerView()
