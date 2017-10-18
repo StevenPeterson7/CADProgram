@@ -24,4 +24,5 @@ public:
 private:
 	ofCamera camera;
 	ofLight mainLight;
+	ofMaterial diffuse;
 };
