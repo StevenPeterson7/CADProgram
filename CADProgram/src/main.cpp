@@ -1,12 +1,8 @@
-#include "ofMain.h"
-#include "ofApp.h"
 #include "common.h"
+#include "ofApp.h"
 
-using namespace std;
-
-//========================================================================
-int main( ) {
+int main() {
 	
-	ofSetupOpenGL(1024,768,OF_WINDOW);
+	ofSetupOpenGL(1280,720,OF_WINDOW);
 	ofRunApp(new ofApp());
 }
