@@ -7,19 +7,18 @@ void ofApp::setup() {
 	ofEnableDepthTest();
 	ofSetVerticalSync(true);
 
-	camera.setPosition(ofVec3f(100, 100, 50));
-	camera.lookAt(ofVec3f(0, 0, 0));
+	camera.setPosition(ofVec3f(0, 0, cameraDistance));
 
 	diffuse.setShininess(20);
-	diffuse.setAmbientColor(ofColor(255, 0, 0));
-	diffuse.setDiffuseColor(ofColor(255, 0, 0));
-	diffuse.setSpecularColor(ofColor(255, 255, 255));
+	diffuse.setAmbientColor(ofColor(200, 200, 200));
+	diffuse.setDiffuseColor(ofColor(200, 200, 200));
+	diffuse.setSpecularColor(ofColor(230, 230, 230));
 
-	mainLight.setAmbientColor(ofColor(100, 100, 100));
 	mainLight.setPointLight();
-	mainLight.setOrientation(ofVec3f(45, 45, 45));
-	mainLight.setGlobalPosition(ofVec3f(0, 100, 200));
-	mainLight.setDiffuseColor(ofColor(200, 0, 0));
+	mainLight.setGlobalPosition(ofVec3f(0, 0, mainLightDistance));
+	mainLight.orbit(mainLightOrbitOffset[0], mainLightOrbitOffset[1], mainLightDistance, ofVec3f(0, 0, 0));
+	mainLight.setAmbientColor(ofColor(150, 150, 150));
+	mainLight.setDiffuseColor(ofColor(255, 255, 255));
 	mainLight.setSpecularColor(ofColor(255, 255, 255));
 }
 
@@ -53,15 +52,19 @@ void ofApp::keyReleased(int key) {
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ) {
+void ofApp::mouseMoved(int x, int y) {
 	
+	lastMousePosition.set(x, y);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button) {
 	
-	camera.orbit(x, y, sqrt(pow(camera.getPosition().x, 2) + pow(camera.getPosition().y, 2) + pow(camera.getPosition().z, 2)), ofVec3f(0, 0, 0));
-	
+	const float xPrime = lastOrbitPosition.x + x - lastMousePosition.x;
+	const float yPrime = lastOrbitPosition.y + y - lastMousePosition.y;
+
+	camera.orbit(xPrime, yPrime, cameraDistance, ofVec3f(0, 0, 0));
+	mainLight.orbit(xPrime + mainLightOrbitOffset[0], yPrime + mainLightOrbitOffset[1], mainLightDistance, ofVec3f(0, 0, 0));
 }
 
 //--------------------------------------------------------------
@@ -72,6 +75,7 @@ void ofApp::mousePressed(int x, int y, int button) {
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button) {
 	
+	lastOrbitPosition.set(lastOrbitPosition.x + x - lastMousePosition.x, lastOrbitPosition.y + y - lastMousePosition.y);
 }
 
 //--------------------------------------------------------------

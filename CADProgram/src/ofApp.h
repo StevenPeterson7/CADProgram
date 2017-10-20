@@ -22,7 +22,14 @@ public:
 	void gotMessage(ofMessage msg);
 
 private:
+	ofVec2f lastMousePosition;
+	ofVec2f lastOrbitPosition;
+
 	ofCamera camera;
 	ofLight mainLight;
 	ofMaterial diffuse;
+
+	float cameraDistance = 100;
+	const float mainLightDistance = 720;
+	const float mainLightOrbitOffset[2] = { -50, -50 };
 };
