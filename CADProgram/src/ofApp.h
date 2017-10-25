@@ -24,4 +24,6 @@ public:
 private:
 	ofCamera camera;
 	ofLight mainLight;
+	display display;
+	bool drawing;
 };
