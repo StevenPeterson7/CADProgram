@@ -44,12 +44,22 @@ void ofApp::draw() {
 	mainLight.disable();
 	camera.end();*/
 	ofSetColor(ofColor(255, 255, 255));
-	display.draw();
+	if (!takingPic)
+	{
+		display.draw();
+	}
 	user.drawShapes();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
+	if (key == 's') {
+		takingPic = true;
+		ofApp::draw();
+		img.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
+		img.save("screenshot.jpg", OF_IMAGE_QUALITY_HIGH);
+		takingPic = false;
+	}
 
 }
 

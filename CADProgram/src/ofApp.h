@@ -26,4 +26,6 @@ private:
 	ofLight mainLight;
 	display display;
 	userDraw user;
+	ofImage img;
+	bool takingPic;
 };
