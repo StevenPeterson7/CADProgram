@@ -25,5 +25,5 @@ private:
 	ofCamera camera;
 	ofLight mainLight;
 	display display;
-	bool drawing;
+	userDraw user;
 };

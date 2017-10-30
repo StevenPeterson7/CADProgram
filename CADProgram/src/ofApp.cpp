@@ -3,11 +3,11 @@
 //--------------------------------------------------------------
 ofPolyline line;
 void ofApp::setup() {
-	display.buttons.push_back(button(ofVec2f(0, 50), ofVec2f(100, 100),  "draw circles"));
-	display.buttons.push_back(button(ofVec2f(0, 200), ofVec2f(100, 100), "draw squares"));
-	display.buttons.push_back(button(ofVec2f(0, 350), ofVec2f(100, 100), "draw triangles"));
-	display.buttons.push_back(button(ofVec2f(0, 500), ofVec2f(100, 100), "draw lines"));
-	display.buttons.push_back(button(ofVec2f(0, 650), ofVec2f(100, 100), "clear"));
+	display.cbuttons.push_back(drawCircleButton(ofVec2f(0, 50), ofVec2f(100, 100),  "draw circles"));
+	display.pbuttons.push_back(drawPolyButton(ofVec2f(0, 200), ofVec2f(100, 100), "draw polygon"));
+	display.lbuttons.push_back(drawLineButton(ofVec2f(0, 350), ofVec2f(100, 100), "draw lines"));
+	display.clearbuttons.push_back(clearButton(ofVec2f(0, 500), ofVec2f(100, 100), "clear"));
+	//display.dbuttons.push_back(dropDownButton(ofVec2f(0, 650), ofVec2f(100, 100), "draw lines"));
 
 
 
@@ -24,7 +24,6 @@ void ofApp::setup() {
 	mainLight.setGlobalPosition(ofVec3f(0, 100, 200));
 	mainLight.setDiffuseColor(ofColor(200, 0, 0));
 	mainLight.setSpecularColor(ofColor(255, 255, 255));
-	drawing = false;
 }
 
 //--------------------------------------------------------------
@@ -46,7 +45,7 @@ void ofApp::draw() {
 	camera.end();*/
 	ofSetColor(ofColor(255, 255, 255));
 	display.draw();
-	line.draw();
+	user.drawShapes();
 }
 
 //--------------------------------------------------------------
@@ -61,21 +60,23 @@ void ofApp::keyReleased(int key) {
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ) {
+	user.makeShape(x, y, false, 0);
 
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button) {
-
+	
+	user.makeShape(x, y, false, button);
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button) {
-	if (!drawing) {
-		display.checkClick(x, y);
+	if (!user.drawing) {
+		display.checkClick(x, y, user);
 	}
 	if (!display.buttonClicked) {
-		line.addVertex(x, y);
+		user.makeShape(x, y, true, button);
 	}
 
 }

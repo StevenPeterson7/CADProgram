@@ -1,24 +1,19 @@
 #pragma once
 #include "common.h"
 
-class button {
-public:
-	std::string text;
-	ofVec2f location;
-	ofVec2f size;
-	button(ofVec2f location, ofVec2f size, std::string text);
-	void setButton(ofVec2f location, ofVec2f size, std::string text);
-	void draw();
-	void checkClick(double x,double y);
-	void onClick();
-	bool clicked;
 
-};
 
 class display {
 public:
-	std::vector <button> buttons;
+	std::vector <drawLineButton> lbuttons;
+	std::vector <drawPolyButton> pbuttons;
+	std::vector <drawCircleButton> cbuttons;
+	std::vector <clearButton> clearbuttons;
+
+	std::vector <dropDownButton> dbuttons;
+
 	void draw();
-	void checkClick(double x, double y);
+	void checkClick(double x, double y, userDraw& user);
 	bool buttonClicked;
 };
+

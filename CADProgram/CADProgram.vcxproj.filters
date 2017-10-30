@@ -13,6 +13,12 @@
     <ClCompile Include="src\gui.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\buttons.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\userDraw.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -36,6 +42,12 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="src\gui.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\buttons.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\userDraw.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>

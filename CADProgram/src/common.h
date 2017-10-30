@@ -5,4 +5,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "userDraw.h"
+#include "buttons.h"
 #include "gui.h"
