@@ -175,15 +175,19 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\buttons.cpp" />
     <ClCompile Include="src\common.cpp" />
     <ClCompile Include="src\gui.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\userDraw.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\buttons.h" />
     <ClInclude Include="src\common.h" />
     <ClInclude Include="src\gui.h" />
     <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\userDraw.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
