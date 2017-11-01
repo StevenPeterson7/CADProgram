@@ -57,7 +57,7 @@ void ofApp::keyPressed(int key) {
 		takingPic = true;
 		ofApp::draw();
 		img.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
-		img.save("screenshot.jpg", OF_IMAGE_QUALITY_HIGH);
+		img.save("screenshot.jpg", OF_IMAGE_QUALITY_BEST);
 		takingPic = false;
 	}
 
