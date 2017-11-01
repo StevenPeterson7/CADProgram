@@ -11,7 +11,7 @@ public:
 
 	void keyPressed(int key);
 	void keyReleased(int key);
-	void mouseMoved(int x, int y );
+	void mouseMoved(int x, int y);
 	void mouseDragged(int x, int y, int button);
 	void mousePressed(int x, int y, int button);
 	void mouseReleased(int x, int y, int button);
@@ -30,6 +30,6 @@ private:
 	ofMaterial diffuse;
 
 	float cameraDistance = 100;
-	const float mainLightDistance = 720;
-	const float mainLightOrbitOffset[2] = { -50, -50 };
+	const float mainLightDistance = 100;
+	const float mainLightOrbitOffset[2] = { 0, 0 };
 };
