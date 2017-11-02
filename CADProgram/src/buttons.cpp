@@ -1,105 +1,94 @@
-#include "common.h"
+//it is important to include "buttons.h" so that buttons.cpp can know what functions and methods it is defining
 #include "buttons.h"
+//we are relying on some of the functionality in ofMain.h
+#include "ofMain.h"
 
-/*button::button(ofVec2f location, ofVec2f size, std::string text)
-{
-	button::location = location;
-	button::text = text;
-	button::size = size;
-}*/
 
-void button::setButton(ofVec2f location, ofVec2f size, std::string text)
+button::button()
 {
-	button::location = location;
-	button::text = text;
-	button::size = size;
+	//we can just leave the constructor empty for this example
+}
+
+void button::setButton(ofVec2f l, ofVec2f s, std::string t)
+{
+	//this is a setter function, all it does is set the classes' private members from inputs
+	location = l;
+	size = s;
+	text = t;
 }
 
 void button::draw()
 {
+	//This sets the color of the button to white
 	ofSetColor(ofColor::fromHex(0xFFFFFF));
-
+	//draws a rectangle at the set location with the set size
 	ofDrawRectangle(button::location, button::size.x, button::size.y);
+	//sets the color of the text to black
 	ofSetColor(ofColor(0, 0, 0));
-	ofDrawBitmapString(button::text, button::location.x + 25, button::location.y + 25);
+	//writes the text inside the button
+	ofDrawBitmapString(button::text, button::location.x + size.x/4, button::location.y + size.y/2);
 }
 
-void button::checkClick(double x, double y, userDraw& user)
+void button::checkClick(ofVec2f mousePos, ofVec2f& circleLocation)
 {
-	button::clicked = false;
 
-	if (x > button::location.x && x<button::location.x + button::size.x && y>button::location.y && y < button::location.y + button::size.y)
+	if (mousePos.x > button::location.x && mousePos.x < button::location.x + button::size.x && mousePos.y > button::location.y && mousePos.y < button::location.y + button::size.y)
 	{
-		onClick(user);
-		button::clicked = true;
+		//if the mouse's position is within the bounds of the button, run the onClick code
+		onClick(circleLocation);
 	}
 	
 }
 
-void button::onClick(userDraw& user)
-{
-	//virtual function inherit from superclass
-	//function pointers
+void button::onClick(ofVec2f& circleLocation)
+{ 
+	//because all of the buttons we are using inherit from this class and re-define this function, no definition is necessary	
 }
 
-drawCircleButton::drawCircleButton(ofVec2f location, ofVec2f size, std::string text)
+
+upButton::upButton()
 {
-	drawCircleButton::location = location;
-	drawCircleButton::size = size;
-	drawCircleButton::text = text;
+	//because we are using a setter function, this constructor can be let empty
 }
 
-void drawCircleButton::onClick(userDraw& user)
+void upButton::onClick(ofVec2f& circleLocation)
 {
-	user.switchShape(2);
-}
-drawLineButton::drawLineButton(ofVec2f location, ofVec2f size, std::string text)
-{
-	drawLineButton::location = location;
-	drawLineButton::size = size;
-	drawLineButton::text = text;
+	if (circleLocation.y > 100) {
+		//if the circle location is not at the upper limit of the screen, move the circle up 10
+		circleLocation.y -= 10;
+	}
 }
 
-void drawLineButton::onClick(userDraw& user)
+downButton::downButton()
 {
-	user.switchShape(1);
 }
 
-drawPolyButton::drawPolyButton(ofVec2f location, ofVec2f size, std::string text)
+void downButton::onClick(ofVec2f& circleLocation)
 {
-	drawPolyButton::location = location;
-	drawPolyButton::size = size;
-	drawPolyButton::text = text;
+	if (circleLocation.y < ofGetViewportHeight() - 100) {
+		circleLocation.y += 10;
+	}
 }
 
-void drawPolyButton::onClick(userDraw& user)
+leftButton::leftButton()
 {
-	user.switchShape(0);
 }
 
-dropDownButton::dropDownButton(ofVec2f location, ofVec2f size, std::string text)
+void leftButton::onClick(ofVec2f& circleLocation)
 {
-	dropDownButton::location = location;
-	dropDownButton::size = size;
-	dropDownButton::text = text;
+	if (circleLocation.x > 100) {
+		circleLocation.x -= 10;
+	}
 }
 
-void dropDownButton::onClick()
+rightButton::rightButton()
 {
-	dropDownButton::text = "dat boi";
 }
 
-clearButton::clearButton(ofVec2f location, ofVec2f size, std::string text)
+void rightButton::onClick(ofVec2f& circleLocation)
 {
-	clearButton::location = location;
-	clearButton::size = size;
-	clearButton::text = text;
+	if (circleLocation.x < ofGetViewportWidth() - 100) {
 
-}
-
-void clearButton::onClick(userDraw & user)
-{
-	user.circles.clear();
-	user.polygons.clear();
-	user.lines.clear();
+		circleLocation.x += 10;
+	}
 }

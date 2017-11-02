@@ -1,10 +1,13 @@
 #pragma once
+//this is to safeguard against included the same header file multiple times in a file
 
 #include "common.h"
+//this is a header file that was created in order to simplify the libraries that we are including
 
 class ofApp: public ofBaseApp {
 
 public:
+	//this is where all of the apps functionality is included
 	void setup();
 	void update();
 	void draw();
@@ -22,10 +25,12 @@ public:
 	void gotMessage(ofMessage msg);
 
 private:
-	ofCamera camera;
-	ofLight mainLight;
-	display display;
-	userDraw user;
-	ofImage img;
-	bool takingPic;
+	// this is where you can include custom members that you might need for your program
+	ofVec2f circleLocation;
+	leftButton lbutton;
+	upButton ubutton;
+	rightButton rbutton;
+	downButton dbutton;
+
+
 };

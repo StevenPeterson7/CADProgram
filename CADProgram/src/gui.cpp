@@ -1,6 +1,6 @@
 #include "gui.h"
 #include "common.h"
-
+/*
 
 void display::draw()
 {
@@ -56,3 +56,4 @@ void display::checkClick(double x, double y, userDraw& user)
 	}
 }
 
+*/

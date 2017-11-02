@@ -2,7 +2,7 @@
 #include "common.h"
 
 
-
+/*
 class display {
 public:
 	std::vector <drawLineButton> lbuttons;
@@ -17,3 +17,4 @@ public:
 	bool buttonClicked;
 };
 
+*/
