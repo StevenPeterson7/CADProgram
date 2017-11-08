@@ -7,6 +7,10 @@ public:
 	ofVec2f size;
 	//button(ofVec2f location, ofVec2f size, std::string text);
 	void setButton(ofVec2f location, ofVec2f size, std::string text);
+	button(ofVec2f l, ofVec2f s, std::string t);
+	button();
+	void setSize(ofVec2f s);
+	void setLocation(ofVec2f l);
 	void draw();
 	void checkClick(double x, double y, userDraw& user);
 	virtual void onClick(userDraw& user);
@@ -39,7 +43,7 @@ class clearButton : public button {
 public:
 	clearButton(ofVec2f location, ofVec2f size, std::string text);
 	void onClick(userDraw& user);
-
+	int test=5;
 
 };
 class dropDownButton : public button {

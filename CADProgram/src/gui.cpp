@@ -4,55 +4,84 @@
 
 void display::draw()
 {
-	for (int i = 0; i < display::lbuttons.size(); i++) {
-		lbuttons[i].draw();
+	for (int i = 0; i < display::buttons.size(); i++) {
+		buttons[i]->draw();
 	}
-	for (int i = 0; i < display::cbuttons.size(); i++) {
-		cbuttons[i].draw();
-	}
-	for (int i = 0; i < display::pbuttons.size(); i++) {
-		pbuttons[i].draw();
-	}
-	for (int i = 0; i < display::dbuttons.size(); i++) {
-		dbuttons[i].draw();
-	}
-	for (int i = 0; i < display::clearbuttons.size(); i++) {
-		clearbuttons[i].draw();
+	for (int i = 0; i < display::toolBars.size(); i++) {
+		toolBars[i]->draw();
 	}
 }
 
 void display::checkClick(double x, double y, userDraw& user)
 {
 	display::buttonClicked = false;
-	for (int i = 0; i < display::lbuttons.size(); i++) {
-		display::lbuttons[i].checkClick(x, y, user);
-		if (display::lbuttons[i].clicked == true) {
+	for (int i = 0; i < display::buttons.size(); i++) {
+		display::buttons[i]->checkClick(x, y, user);
+		if (display::buttons[i]->clicked == true) {
 			display::buttonClicked = true;
 		}
 	}
-	for (int i = 0; i < display::cbuttons.size(); i++) {
-		display::cbuttons[i].checkClick(x, y, user);
-		if (display::cbuttons[i].clicked == true) {
+	for (int i = 0; i < display::toolBars.size(); i++) {
+		display::toolBars[i]->checkClick(x, y, user);
+		if (display::toolBars[i]->clicked == true) {
 			display::buttonClicked = true;
 		}
 	}
-	for (int i = 0; i < display::pbuttons.size(); i++) {
-		display::pbuttons[i].checkClick(x, y, user);
-		if (display::pbuttons[i].clicked == true) {
-			display::buttonClicked = true;
-		}
+
+}
+
+toolBar::toolBar()
+{
+}
+
+toolBar::toolBar(ofVec2f l, ofVec2f s, int n)
+{
+	size = s;
+	location = l;
+	double xSize = (s.x / n) - 5;
+	cout << xSize << endl;
+	std::stringstream ss;
+	for (int i = 0; i < n; i++) {
+		ss << i;
+		button newButton(ofVec2f(i*(xSize + 5), location.y), ofVec2f(xSize, s.y), "test");
+		button *newButtonPtr = &newButton;
+		buttons.push_back(newButtonPtr);
 	}
-	for (int i = 0; i < display::dbuttons.size(); i++) {
-		display::dbuttons[i].checkClick(x, y, user);
-		if (display::dbuttons[i].clicked == true) {
-			display::buttonClicked = true;
+
+}
+
+void toolBar::setToolBar(ofVec2f l, ofVec2f s)
+{
+	size = s;
+	location = l;
+}
+
+void toolBar::draw()
+{
+	double xPos = 5;
+	
+	ofSetColor(ofColor(0, 0, 0));
+	for (int i = 0; i < buttons.size(); i++) {
+		if (buttons[i]->size.y > size.y) {
+			buttons[i]->setSize(ofVec2f(buttons[i]->size.x, size.y));
 		}
+		buttons[i]->setLocation(ofVec2f(xPos, location.y));
+		xPos += buttons[i]->size.x + 5;
+		buttons[i]->draw();
+
 	}
-	for (int i = 0; i < display::clearbuttons.size(); i++) {
-		display::clearbuttons[i].checkClick(x, y, user);
-		if (display::clearbuttons[i].clicked == true) {
-			display::buttonClicked = true;
+	ofSetColor(ofColor::fromHex(0xFFFFFF));
+
+	ofDrawRectangle(location, size.x, size.y);
+}
+
+void toolBar::checkClick(double x, double y, userDraw & user)
+{
+	clicked = false;
+	for (int i = 0; i < buttons.size(); i++) {
+		buttons[i]->checkClick(x, y, user);
+		if (buttons[i]->clicked == true) {
+			clicked = true;
 		}
 	}
 }
-

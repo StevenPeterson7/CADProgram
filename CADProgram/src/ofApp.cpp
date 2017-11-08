@@ -3,14 +3,12 @@
 //--------------------------------------------------------------
 ofPolyline line;
 void ofApp::setup() {
-	display.cbuttons.push_back(drawCircleButton(ofVec2f(0, 50), ofVec2f(100, 100),  "draw circles"));
-	display.pbuttons.push_back(drawPolyButton(ofVec2f(0, 200), ofVec2f(100, 100), "draw polygon"));
-	display.lbuttons.push_back(drawLineButton(ofVec2f(0, 350), ofVec2f(100, 100), "draw lines"));
-	display.clearbuttons.push_back(clearButton(ofVec2f(0, 500), ofVec2f(100, 100), "clear"));
-	//display.dbuttons.push_back(dropDownButton(ofVec2f(0, 650), ofVec2f(100, 100), "draw lines"));
-
-
-
+	display.buttons.push_back(&drawCircleButton(ofVec2f(0, 50), ofVec2f(100, 100),  "draw circles"));
+	display.buttons.push_back(&drawPolyButton(ofVec2f(0, 200), ofVec2f(100, 100), "draw polygon"));
+	display.buttons.push_back(&drawLineButton(ofVec2f(0, 350), ofVec2f(100, 100), "draw lines"));
+	display.buttons.push_back(&clearButton(ofVec2f(0, 500), ofVec2f(100, 100), "clear"));
+	cout << display.buttons[3]->clicked << endl;
+	
 
 	ofEnableDepthTest();
 	ofSetVerticalSync(true);
@@ -48,6 +46,8 @@ void ofApp::draw() {
 	{
 		display.draw();
 	}
+	ofSetColor(ofColor(255, 255, 255));
+
 	user.drawShapes();
 }
 

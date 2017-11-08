@@ -15,13 +15,41 @@ void button::setButton(ofVec2f location, ofVec2f size, std::string text)
 	button::size = size;
 }
 
+button::button(ofVec2f l, ofVec2f s, std::string t)
+{
+	location = l;
+	size = s;
+	text = t;
+
+
+}
+
+button::button()
+{
+	text = "test";
+}
+
+void button::setSize(ofVec2f s)
+{
+	size = s;
+}
+
+void button::setLocation(ofVec2f l)
+{
+	location = l;
+}
+
 void button::draw()
 {
+	std::cout << text << endl;
+
 	ofSetColor(ofColor::fromHex(0xFFFFFF));
 
 	ofDrawRectangle(button::location, button::size.x, button::size.y);
 	ofSetColor(ofColor(0, 0, 0));
 	ofDrawBitmapString(button::text, button::location.x + 25, button::location.y + 25);
+	ofSetColor(ofColor::fromHex(0x000000));
+	ofDrawRectangle(location.x - 1, location.y - 1, size.x + 2, size.y + 2);
 }
 
 void button::checkClick(double x, double y, userDraw& user)
@@ -38,6 +66,7 @@ void button::checkClick(double x, double y, userDraw& user)
 
 void button::onClick(userDraw& user)
 {
+	text = "new";
 	//virtual function inherit from superclass
 	//function pointers
 }
