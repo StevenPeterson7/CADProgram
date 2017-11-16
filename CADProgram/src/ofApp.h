@@ -27,5 +27,5 @@ private:
 	display display;
 	userDraw user;
 	ofImage img;
-	bool takingPic;
+	bool takingPic=false;
 };

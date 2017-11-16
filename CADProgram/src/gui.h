@@ -11,16 +11,20 @@ public:
 	void setToolBar(ofVec2f l, ofVec2f s);
 	void draw();
 	void checkClick(double x, double y, userDraw& user);
+	void checkHover(double x, double y);
 	bool clicked;
 
 };
 
 class display {
 public:
+	display();
 	std::vector  <toolBar*> toolBars;
 	std::vector <button*> buttons;
+	
 
 	void draw();
 	void checkClick(double x, double y, userDraw& user);
+	void checkHover(double x, double y);
 	bool buttonClicked;
 };

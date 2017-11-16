@@ -8,11 +8,11 @@
 	button::size = size;
 }*/
 
-void button::setButton(ofVec2f location, ofVec2f size, std::string text)
+void button::setButton(ofVec2f l, ofVec2f s, std::string t)
 {
-	button::location = location;
-	button::text = text;
-	button::size = size;
+	button::location = l;
+	button::text = t;
+	button::size = s;
 }
 
 button::button(ofVec2f l, ofVec2f s, std::string t)
@@ -20,13 +20,13 @@ button::button(ofVec2f l, ofVec2f s, std::string t)
 	location = l;
 	size = s;
 	text = t;
-
+	clicked = false;
+	backgroundColor = ofColor(255, 255, 255);
 
 }
 
 button::button()
 {
-	text = "test";
 }
 
 void button::setSize(ofVec2f s)
@@ -41,14 +41,13 @@ void button::setLocation(ofVec2f l)
 
 void button::draw()
 {
-	std::cout << text << endl;
+	ofSetColor(backgroundColor);
 
-	ofSetColor(ofColor::fromHex(0xFFFFFF));
-
-	ofDrawRectangle(button::location, button::size.x, button::size.y);
+	ofDrawRectangle(location, size.x, size.y);
 	ofSetColor(ofColor(0, 0, 0));
-	ofDrawBitmapString(button::text, button::location.x + 25, button::location.y + 25);
-	ofSetColor(ofColor::fromHex(0x000000));
+//	std::cout << text;
+	ofDrawBitmapString(text, location.x + 25, location.y + 25);
+	ofSetColor(ofColor(0, 0, 0));
 	ofDrawRectangle(location.x - 1, location.y - 1, size.x + 2, size.y + 2);
 }
 
@@ -71,22 +70,35 @@ void button::onClick(userDraw& user)
 	//function pointers
 }
 
-drawCircleButton::drawCircleButton(ofVec2f location, ofVec2f size, std::string text)
+void button::checkHover(double x, double y)
 {
-	drawCircleButton::location = location;
-	drawCircleButton::size = size;
-	drawCircleButton::text = text;
+
+
+	if (x >location.x && x<location.x + size.x && y>location.y && y < location.y + size.y)
+	{
+		backgroundColor = ofColor(200, 200, 200);
+		
+	}
+	else {
+		backgroundColor = ofColor(255, 255, 255);
+	}
+
+}
+
+
+
+drawCircleButton::drawCircleButton(ofVec2f l, ofVec2f s, std::string t, int test):button(l, s, t)
+{
+	
 }
 
 void drawCircleButton::onClick(userDraw& user)
 {
 	user.switchShape(2);
 }
-drawLineButton::drawLineButton(ofVec2f location, ofVec2f size, std::string text)
+drawLineButton::drawLineButton(ofVec2f l, ofVec2f s, std::string t):button(l, s, t)
 {
-	drawLineButton::location = location;
-	drawLineButton::size = size;
-	drawLineButton::text = text;
+
 }
 
 void drawLineButton::onClick(userDraw& user)
@@ -94,11 +106,9 @@ void drawLineButton::onClick(userDraw& user)
 	user.switchShape(1);
 }
 
-drawPolyButton::drawPolyButton(ofVec2f location, ofVec2f size, std::string text)
+drawPolyButton::drawPolyButton(ofVec2f l, ofVec2f s, std::string t):button(l, s, t)
 {
-	drawPolyButton::location = location;
-	drawPolyButton::size = size;
-	drawPolyButton::text = text;
+
 }
 
 void drawPolyButton::onClick(userDraw& user)
@@ -106,11 +116,9 @@ void drawPolyButton::onClick(userDraw& user)
 	user.switchShape(0);
 }
 
-dropDownButton::dropDownButton(ofVec2f location, ofVec2f size, std::string text)
+dropDownButton::dropDownButton(ofVec2f l, ofVec2f s, std::string t):button(l, s, t)
 {
-	dropDownButton::location = location;
-	dropDownButton::size = size;
-	dropDownButton::text = text;
+
 }
 
 void dropDownButton::onClick()
@@ -118,16 +126,13 @@ void dropDownButton::onClick()
 	dropDownButton::text = "dat boi";
 }
 
-clearButton::clearButton(ofVec2f location, ofVec2f size, std::string text)
+clearButton::clearButton(ofVec2f l, ofVec2f s, std::string t):button(l, s, t)
 {
-	clearButton::location = location;
-	clearButton::size = size;
-	clearButton::text = text;
 
 }
-
 void clearButton::onClick(userDraw & user)
 {
+
 	user.circles.clear();
 	user.polygons.clear();
 	user.lines.clear();

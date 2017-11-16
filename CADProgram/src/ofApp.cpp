@@ -1,13 +1,15 @@
 #include "ofApp.h"
 #include "common.h"
 //--------------------------------------------------------------
-ofPolyline line;
 void ofApp::setup() {
-	display.buttons.push_back(&drawCircleButton(ofVec2f(0, 50), ofVec2f(100, 100),  "draw circles"));
-	display.buttons.push_back(&drawPolyButton(ofVec2f(0, 200), ofVec2f(100, 100), "draw polygon"));
-	display.buttons.push_back(&drawLineButton(ofVec2f(0, 350), ofVec2f(100, 100), "draw lines"));
-	display.buttons.push_back(&clearButton(ofVec2f(0, 500), ofVec2f(100, 100), "clear"));
-	cout << display.buttons[3]->clicked << endl;
+	//display = new display();
+	display.buttons.push_back(new drawCircleButton(ofVec2f(0, 50), ofVec2f(100, 100),  "draw circles", 15));
+	display.buttons.push_back(new drawPolyButton(ofVec2f(0, 200), ofVec2f(100, 100), "draw polygon"));
+	display.buttons.push_back(new drawLineButton(ofVec2f(0, 350), ofVec2f(100, 100), "draw lines"));
+	display.buttons.push_back(new clearButton(ofVec2f(0, 500), ofVec2f(100, 100), "clear"));
+	display.toolBars.push_back(new toolBar(ofVec2f(0, 0), ofVec2f(1280, 50), 15));
+
+
 	
 
 	ofEnableDepthTest();
@@ -42,11 +44,11 @@ void ofApp::draw() {
 	mainLight.disable();
 	camera.end();*/
 	ofSetColor(ofColor(255, 255, 255));
-	if (!takingPic)
-	{
+	//if (!takingPic)
+	//{
 		display.draw();
-	}
-	ofSetColor(ofColor(255, 255, 255));
+	//}
+	ofSetColor(ofColor(0, 0, 0));
 
 	user.drawShapes();
 }
@@ -55,22 +57,25 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
 	if (key == 's') {
 		takingPic = true;
-		ofApp::draw();
-		img.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
-		img.save("screenshot.jpg", OF_IMAGE_QUALITY_BEST);
-		takingPic = false;
+		//ofApp::draw();
+		//img.grabScreen(0, 0, ofGetWidth(), ofGetHeight());0
+		//img.save("screenshot.jpg", OF_IMAGE_QUALITY_BEST);
 	}
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
+	if (key == 's') {
+		takingPic = false;
+	}
 
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ) {
 	user.makeShape(x, y, false, 0);
+	display.checkHover(x, y);
 
 }
 

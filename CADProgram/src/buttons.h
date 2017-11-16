@@ -14,6 +14,9 @@ public:
 	void draw();
 	void checkClick(double x, double y, userDraw& user);
 	virtual void onClick(userDraw& user);
+	void checkHover(double x, double y);
+	ofColor backgroundColor;
+	
 	bool clicked;
 
 };
@@ -27,7 +30,7 @@ public:
 };
 class drawCircleButton : public button {
 public:
-	drawCircleButton(ofVec2f location, ofVec2f size, std::string text);
+	drawCircleButton(ofVec2f location, ofVec2f size, std::string text, int test);
 	void onClick(userDraw& user);
 
 
