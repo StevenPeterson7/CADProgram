@@ -20,6 +20,7 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
+	void mouseScrolled(int x, int y);
 
 private:
 	ofCamera camera;
