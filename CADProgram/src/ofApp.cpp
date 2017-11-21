@@ -3,17 +3,22 @@
 //--------------------------------------------------------------
 void ofApp::setup() {
 	//display = new display();
-	display.buttons.push_back(new drawCircleButton(ofVec2f(0, 50), ofVec2f(100, 100),  "draw circles"));
+	display.buttons.push_back(new dropDownButton(ofVec2f(0, 0), ofVec2f(100, 30), "menu", 5));
+	display.buttons[0]->setVisible(false);
+	display.buttons[0]->expand();
+	display.toolBars.push_back(new toolBar(ofVec2f(0, 0), ofVec2f(1280, 50), 15));
+/*	display.toolBars[0]->setButton(drawCircleButton(ofVec2f(0, 50), ofVec2f(100, 100), "draw circles"));
+	display.toolBars[0]->setButton(drawPolyButton(ofVec2f(0, 200), ofVec2f(100, 100), "draw polygon"));
+	display.toolBars[0]->setButton(drawLineButton(ofVec2f(0, 350), ofVec2f(100, 100), "draw lines"));
+	display.toolBars[0]->setButton(clearButton(ofVec2f(0, 500), ofVec2f(100, 100), "clear"));*/
+	display.buttons.push_back(new drawCircleButton(ofVec2f(0, 50), ofVec2f(100, 100), "draw circles"));
 	display.buttons.push_back(new drawPolyButton(ofVec2f(0, 200), ofVec2f(100, 100), "draw polygon"));
 	display.buttons.push_back(new drawLineButton(ofVec2f(0, 350), ofVec2f(100, 100), "draw lines"));
 	display.buttons.push_back(new clearButton(ofVec2f(0, 500), ofVec2f(100, 100), "clear"));
-	display.toolBars.push_back(new toolBar(ofVec2f(0, 0), ofVec2f(1280, 50), 15));
 
 	display.buttons.push_back(new dropDownButton(ofVec2f(1180, 55), ofVec2f(100, 100), "dropdown", 3));
 	
-	display.buttons.push_back(new dropDownButton(ofVec2f(0, 0), ofVec2f(100, 30), "menu", 5));
-	display.buttons[5]->setVisible(false);
-	display.buttons[5]->expand();
+	
 
 	//display.toolBars[0]->buttons[14] = new dropDownButton(ofVec2f(200, 100), ofVec2f(100, 100), "dropdown", 3);
 	//display.toolBars[0]->buttons[14]->setLocation(ofVec2f(display.toolBars[0]->buttons[14]->location.x, display.toolBars[0]->buttons[14]->location.y));
@@ -104,8 +109,8 @@ void ofApp::mousePressed(int x, int y, int button) {
 		user.makeShape(x, y, true, button);
 	}
 	if (button == 2) {
-		display.buttons[5]->setLocation(ofVec2f(x, y));
-		display.buttons[5]->setVisible(!display.buttons[5]->visible);
+		display.buttons[0]->setLocation(ofVec2f(x, y));
+		display.buttons[0]->setVisible(!display.buttons[0]->visible);
 
 	}
 

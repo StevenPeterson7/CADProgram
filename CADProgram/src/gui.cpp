@@ -73,6 +73,19 @@ void toolBar::setToolBar(ofVec2f l, ofVec2f s)
 	location = l;
 }
 
+void toolBar::addButton(button& newButton)
+{
+	buttons.push_back(&newButton);
+
+}
+
+void toolBar::setButton(button& setButton)
+{
+
+	buttons[index] = &setButton;
+	index++;
+}
+
 void toolBar::draw()
 {
 	double xPos = 5;
@@ -82,7 +95,7 @@ void toolBar::draw()
 		if (buttons[i]->size.y > size.y) {
 			buttons[i]->setSize(ofVec2f(buttons[i]->size.x, size.y));
 		}
-		buttons[i]->setLocation(ofVec2f(xPos, location.y));
+		//buttons[i]->setLocation(ofVec2f(xPos, location.y));
 		xPos += buttons[i]->size.x + 5;
 		buttons[i]->draw();
 
