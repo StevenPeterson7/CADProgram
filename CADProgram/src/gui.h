@@ -20,11 +20,13 @@ public:
 
 };
 
+
 class display {
 public:
 	display();
 	std::vector  <toolBar*> toolBars;
 	std::vector <button*> buttons;
+	//graph graphS;
 	
 
 	void draw();

@@ -2,10 +2,6 @@
 #include "common.h"
 
 
-display::display()
-{
-}
-
 void display::draw()
 {
 	for (int i = 0; i < display::buttons.size(); i++) {
@@ -14,6 +10,7 @@ void display::draw()
 	for (int i = 0; i < display::toolBars.size(); i++) {
 		toolBars[i]->draw();
 	}
+//	graphS.draw();
 }
 
 void display::checkClick(double x, double y, userDraw& user)
@@ -123,4 +120,10 @@ void toolBar::checkHover(double x, double y)
 		toolBar::buttons[i]->checkHover(x, y);
 
 	}
+}
+
+
+display::display()
+{
+	//graphS = graph();
 }

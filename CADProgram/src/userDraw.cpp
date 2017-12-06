@@ -1,6 +1,95 @@
 #include "common.h"
 #include "userDraw.h"
 
+graph::graph()
+{
+	xMin = -10;
+	yMin = -10;
+	xMax = 10;
+	yMax = 10;
+	xScale = 1;
+	yScale = 1;
+	xAxisPoints[0] = ofVec2f(0, ofGetWindowHeight() / 2);
+	xAxisPoints[1] = ofVec2f(ofGetWindowWidth(), ofGetWindowHeight() / 2);
+	yAxisPoints[0] = ofVec2f(ofGetWindowWidth() / 2, 0);
+	yAxisPoints[1] = ofVec2f(ofGetWindowWidth() / 2, ofGetWindowHeight());
+
+}
+
+void graph::resizeX(double scalar)
+{
+	xMax *= scalar;
+	xMin *= scalar;
+}
+
+void graph::resizeY(double scalar)
+{
+	yMax *= scalar;
+	yMin *= scalar;
+}
+
+void graph::rescaleX(double scale)
+{
+	xScale = scale;
+}
+void graph::rescaley(double scale)
+{
+	yScale = scale;
+}
+
+void graph::draw()
+{
+	ofPolyline xAxis;
+	ofPolyline yAxis;
+
+	std::vector <ofPolyline> xScaleLines;
+	std::vector <ofPolyline> yScaleLines;
+
+
+	xAxis.addVertex(xAxisPoints[0]);
+	xAxis.addVertex(xAxisPoints[1]);
+	yAxis.addVertex(yAxisPoints[0]);
+	yAxis.addVertex(yAxisPoints[1]);
+
+	ofSetColor(ofColor(0, 0, 0));
+
+	for (int i = 0; i < (xMax - xMin) / xScale; i++) {
+		ofPolyline temp;
+		temp.addVertex(ofGetWindowWidth() / ((xMax - xMin) / xScale)*i, (ofGetHeight() / 2) - 5);
+		temp.addVertex(ofGetWindowWidth() / ((xMax - xMin) / xScale)*i, (ofGetHeight() / 2) + 5);
+		//temp.draw();
+		xScaleLines.push_back(temp);
+		stringstream ss;
+		ss << (xScale*i) + xMin;
+		ofDrawBitmapString(ss.str(), ofVec2f(ofGetWindowWidth() / ((xMax - xMin) / xScale)*i, (ofGetHeight() / 2) - 15));
+
+	}
+	for (int i = 0; i < (yMax - yMin) / yScale; i++) {
+		ofPolyline temp;
+		temp.addVertex((ofGetWidth() / 2) - 5, ofGetWindowHeight() / ((yMax - yMin) / yScale)*i);
+		temp.addVertex((ofGetWidth() / 2) + 5, ofGetWindowHeight() / ((yMax - yMin) / yScale)*i);
+		//temp.draw();
+		yScaleLines.push_back(temp);
+		stringstream ss;
+		ss << (yScale*((yMax - yMin) / yScale) - i) + yMin;
+		ofDrawBitmapString(ss.str(), ofVec2f((ofGetWindowWidth() / 2) - 25, ofGetWindowHeight() / ((yMax - yMin) / yScale)*i));
+	}
+
+	xAxis.draw();
+	yAxis.draw();
+
+	for (int i = 0; i < xScaleLines.size(); i++) {
+		xScaleLines[i].draw();
+	}
+	for (int i = 0; i < yScaleLines.size(); i++) {
+		yScaleLines[i].draw();
+	}
+}
+userDraw::userDraw()
+{
+	graphS = graph();
+}
+
 void userDraw::switchShape(int shape)
 {
 	shapeDrawing = shape;
@@ -9,6 +98,7 @@ void userDraw::switchShape(int shape)
 
 void userDraw::drawShapes()
 {
+	graphS.draw();
 	for (int i = 0; i < polygons.size(); i++) {
 		ofPolyline poly;
 		for (int j = 0; j < polygons[i].size(); j++){

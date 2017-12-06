@@ -33,6 +33,7 @@ public:
 	void onClick(userDraw& user);
 
 
+
 };
 class drawCircleButton : public button {
 public:
@@ -54,6 +55,18 @@ public:
 	void onClick(userDraw& user);
 
 };
+class zoomIn : public button {
+public:
+	zoomIn(ofVec2f location, ofVec2f size, std::string text);
+	void onClick(userDraw& user);
+
+};
+class zoomOut : public button {
+public:
+	zoomOut(ofVec2f location, ofVec2f size, std::string text);
+	void onClick(userDraw& user);
+
+};
 class dropDownButton : public button {
 public:
 	dropDownButton(ofVec2f location, ofVec2f size, std::string text, int n);
@@ -65,7 +78,16 @@ public:
 	void onClick(userDraw &user);
 	void checkHover(double x, double y);
 	void expand();
+};
 
 
-
+class enterText {
+public:
+	enterText(ofVec2f l, ofVec2f s);
+	ofVec2f location;
+	ofVec2f size;
+	std::string text;
+	void draw();
+	void editText();
+	void submit();
 };

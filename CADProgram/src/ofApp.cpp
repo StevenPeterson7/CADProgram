@@ -17,7 +17,10 @@ void ofApp::setup() {
 	display.buttons.push_back(new clearButton(ofVec2f(0, 500), ofVec2f(100, 100), "clear"));
 
 	display.buttons.push_back(new dropDownButton(ofVec2f(1180, 55), ofVec2f(100, 100), "dropdown", 3));
-	
+	display.buttons.push_back(new zoomIn(ofVec2f(1180, 200), ofVec2f(100, 25), "zoom in"));
+
+	display.buttons.push_back(new zoomOut(ofVec2f(1180, 400), ofVec2f(100, 25), "zoom out"));
+
 	
 
 	//display.toolBars[0]->buttons[14] = new dropDownButton(ofVec2f(200, 100), ofVec2f(100, 100), "dropdown", 3);

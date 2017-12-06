@@ -244,3 +244,45 @@ void clearButton::onClick(userDraw & user)
 	user.polygons.clear();
 	user.lines.clear();
 }
+
+zoomIn::zoomIn(ofVec2f l, ofVec2f s, std::string t):button(l,s,t)
+{
+}
+
+void zoomIn::onClick(userDraw & user)
+{
+	std::cout << "zoom in" << endl;
+
+	user.graphS.resizeX(0.91);
+	user.graphS.resizeY(0.91);
+}
+
+
+
+zoomOut::zoomOut(ofVec2f l, ofVec2f s, std::string t):button(l,s,t)
+{
+}
+
+void zoomOut::onClick(userDraw & user)
+{
+	std::cout << "zoom out" << endl;
+	user.graphS.resizeX(1.1);
+	user.graphS.resizeY(1.1);
+}
+
+enterText::enterText(ofVec2f l, ofVec2f s)
+{
+}
+
+void enterText::draw()
+{
+}
+
+void enterText::editText()
+{
+}
+
+void enterText::submit()
+{
+}
+
