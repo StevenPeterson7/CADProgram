@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "ofMain.h"
+#include "maze.h"
 
 class player
 {
@@ -14,17 +15,18 @@ public:
 	std::vector <ofVec2f> points;
 	ofPath arc;
 	double radius;
+	bool inWall(ofVec2f before, ofVec2f after, maze nMaze);
 
 	void changeRadius();
 
-	void moveForward();
-	void moveBackward();
-	void moveLeft();
-	void moveRight();
+	void moveForward(maze nMaze);
+	void moveBackward(maze nMaze);
+	void moveLeft(maze nMaze);
+	void moveRight(maze nMaze);
 
 	void changeView();
 
-	void castDemRays();
+	void castDemRays(maze nMaze);
 	
 	void drawPlayer2d();
 

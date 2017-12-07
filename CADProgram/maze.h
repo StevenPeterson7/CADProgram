@@ -9,11 +9,14 @@ public:
 	std::vector< std::vector <cell> > cells;
 	std::vector< std::vector <bool> > path;
 	std::vector< std::vector <bool> > wasHere;
+	bool showPath=false;
 
 	void generateMaze();
 	void drawMaze();
 	void solve();
 	bool recursiveSolve(int xSolve, int ySolve);
+	double cellWidth;
+	double cellHeight;
 	
 private:
 	int startX;

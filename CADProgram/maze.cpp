@@ -184,19 +184,19 @@ void maze::generateMaze()
 
 void maze::drawMaze()
 {
-	double cellHeight = ofGetWindowHeight() / y;
-	double cellWidth = ofGetWindowWidth() / y;
+	cellHeight = ofGetWindowHeight() / y;
+	cellWidth = ofGetWindowWidth() / y;
 
 
 	for (int i = 0; i < maze::x; i++) {
 		for (int j = 0; j < maze::y; j++) {
-			
-			
 			cells[i][j].drawCell(i, maze::x, j, maze::y);
-			if (maze::path[i][j]) {
-				//std::cout << "test" << endl;
-				ofSetColor(ofColor(255, 0, 0));
-				ofDrawCircle(ofVec2f((i*cellWidth) + cellWidth / 2, (j*cellHeight) + cellHeight / 2), 1);
+
+			if (showPath) {
+				if (maze::path[i][j]) {
+					ofSetColor(ofColor(255, 0, 0));
+					ofDrawCircle(ofVec2f((i*cellWidth) + cellWidth / 2, (j*cellHeight) + cellHeight / 2), 2);
+				}
 			}
 		}
 	}
@@ -240,7 +240,6 @@ bool maze::recursiveSolve(int xSolve, int ySolve)
 
 
 	if (wasHere[xSolve][ySolve]) {
-		cout << wasHere[xSolve][ySolve];
 		return false;
 	}
 

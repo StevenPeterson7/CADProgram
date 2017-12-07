@@ -5,7 +5,7 @@
 
 vector<int> points;
 bool sizingCircle = false;
-maze newMaze(100, 100);
+maze newMaze(75, 75);
 player player1(5, 5);
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -43,20 +43,23 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	if (key == 'w') {
-		player1.moveForward();
+		player1.moveForward(newMaze);
 	}
 	if (key == 'a') {
-		player1.moveLeft();
+		player1.moveLeft(newMaze);
 	}
 	if (key == 's') {
-		player1.moveBackward();
+		player1.moveBackward(newMaze);
 	}
 	if (key == 'd') {
-		player1.moveRight();
+		player1.moveRight(newMaze);
 	}
 
 	if (key == 'n') {
 		newMaze.solve();
+	}
+	if (key == 'k') {
+		newMaze.showPath = !newMaze.showPath;
 	}
 
 }
