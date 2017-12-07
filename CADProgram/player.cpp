@@ -62,9 +62,10 @@ void player::castDemRays() {
 
 void player::drawPlayer2d()
 {
+	ofSetColor(ofColor(0, 0, 0));
 	
 	ofDrawCircle(player::x, player::y, 2);
-	player::arc.draw();
+	//player::arc.draw();
 }
 
 void player::drawPlayerView()

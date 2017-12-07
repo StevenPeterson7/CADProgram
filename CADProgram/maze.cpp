@@ -169,13 +169,124 @@ void maze::generateMaze()
 			xloc--;
 		}
 	}*/
+
+	for (int i = 0; i < cells.size(); i++) {
+		std::vector <bool> temp;
+		wasHere.push_back(temp);
+		path.push_back(temp);
+		for (int j = 0; j < cells[i].size(); j++) {
+			wasHere[i].push_back(false);
+			path[i].push_back(false);
+
+		}
+	}
 }
 
 void maze::drawMaze()
 {
+	double cellHeight = ofGetWindowHeight() / y;
+	double cellWidth = ofGetWindowWidth() / y;
+
+
 	for (int i = 0; i < maze::x; i++) {
 		for (int j = 0; j < maze::y; j++) {
+			
+			
 			cells[i][j].drawCell(i, maze::x, j, maze::y);
+			if (maze::path[i][j]) {
+				//std::cout << "test" << endl;
+				ofSetColor(ofColor(255, 0, 0));
+				ofDrawCircle(ofVec2f((i*cellWidth) + cellWidth / 2, (j*cellHeight) + cellHeight / 2), 1);
+			}
 		}
 	}
+}
+
+void maze::solve()
+{
+	startX = 0;
+	startY = 0;
+	endX = cells.size()-1;
+	endY = cells[0].size()-1;
+	//endX = 25;
+	//endY = 99;
+	
+	bool b = recursiveSolve(startX, startY);
+	std::cout << "a solution is " << b << endl;
+	std::cout << endl << endl << endl;
+
+	for (int i = 0; i < path.size(); i++) {
+		for (int j = 0; j < path[i].size(); j++) {
+			if (path[j][i]) {
+				std::cout << " 1";
+
+			}
+			else {
+				std::cout << " 0";
+			}
+		}
+		std::cout << endl;
+	}
+}
+
+bool maze::recursiveSolve(int xSolve, int ySolve)
+{
+	int deadend = 0;
+
+	if (xSolve == endX && ySolve == endY) {
+		path[xSolve][ySolve] = true;
+		return true;
+	}
+
+
+	if (wasHere[xSolve][ySolve]) {
+		cout << wasHere[xSolve][ySolve];
+		return false;
+	}
+
+
+	for (int i = 0; i < 4; i++) {
+		if (cells[xSolve][ySolve].passages[i]) {
+			deadend++;
+		}
+	}
+	if (deadend < 2 && xSolve != startX && ySolve != startY) {
+		return false;
+	}
+
+	wasHere[xSolve][ySolve] = true;
+
+
+	if (cells[xSolve][ySolve].passages[1]) {
+		if (recursiveSolve(xSolve - 1, ySolve)) {
+			path[xSolve][ySolve] = true;
+
+			return true;
+		}
+	}
+	if (cells[xSolve][ySolve].passages[0]) {
+		if (recursiveSolve(xSolve, ySolve - 1)) {
+			path[xSolve][ySolve] = true;
+			
+			return true;
+		}
+	}
+	if (cells[xSolve][ySolve].passages[3]) {
+		if (recursiveSolve(xSolve + 1, ySolve)) {
+			path[xSolve][ySolve] = true;
+
+			return true;
+		}
+	}
+	if (cells[xSolve][ySolve].passages[2]) {
+		if (recursiveSolve(xSolve, ySolve + 1)) {
+			path[xSolve][ySolve] = true;
+
+			return true;
+		}
+	}
+
+
+	return false;
+
 }

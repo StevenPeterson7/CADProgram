@@ -4,10 +4,10 @@
 #include <vector>
 
 cell::cell(int x1, int y1) {
-	passages[0] = false;
-	passages[1] = false;
-	passages[2] = false;
-	passages[3] = false;
+	passages[0] = false;//top
+	passages[1] = false;//left
+	passages[2] = false;//bottom
+	passages[3] = false;//right
 	isBorder = false;
 	visited = false;
 
@@ -23,8 +23,8 @@ void cell::test() {
 
 void cell::drawCell(int xPos, int mazeWidth, int yPos, int mazeHeight) {
 	int wallWidth = 1;
-	double cellWidth = 1024 / mazeWidth;
-	double cellHeight = 700 / mazeHeight;
+	double cellWidth = ofGetWindowWidth() / mazeWidth;
+	double cellHeight = ofGetWindowHeight() / mazeHeight;
 	ofSetColor(255);
 	ofDrawRectangle(cellWidth*xPos, cellHeight*yPos, cellWidth, cellHeight);
 	ofSetColor(0);

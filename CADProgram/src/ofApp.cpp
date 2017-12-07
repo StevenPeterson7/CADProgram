@@ -5,7 +5,7 @@
 
 vector<int> points;
 bool sizingCircle = false;
-maze newMaze(50, 50);
+maze newMaze(100, 100);
 player player1(5, 5);
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -55,7 +55,9 @@ void ofApp::keyPressed(int key){
 		player1.moveRight();
 	}
 
-
+	if (key == 'n') {
+		newMaze.solve();
+	}
 
 }
 
@@ -113,6 +115,7 @@ void ofApp::mouseEntered(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::mouseExited(int x, int y){
+	
 
 }
 
